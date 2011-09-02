@@ -1,0 +1,19 @@
+<assembly>
+  <id>docflex</id>
+  <formats>
+    <format>jar</format>
+  </formats>
+  <includeBaseDirectory>false</includeBaseDirectory>
+  <fileSets>
+    <fileSet>
+      <outputDirectory>/</outputDirectory>
+      <directory>${project.build.directory}/docflex</directory>
+    </fileSet>
+  </fileSets>
+  <files>
+    <file>
+      <source>${basedir}/src/main/xsd/terracotta-${schema.version}.xsd</source>
+      <outputDirectory>/</outputDirectory>
+    </file>
+  </files>  
+</assembly>
