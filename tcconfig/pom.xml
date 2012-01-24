@@ -12,13 +12,12 @@
     <relativePath>..</relativePath>
   </parent>
 
-  <groupId>org.terracotta</groupId>
   <artifactId>tcconfig</artifactId>
   <packaging>jar</packaging>
   <name>tcconfig</name>
   
   <properties>
-    <schema.version>6</schema.version>
+    <schema.version>7</schema.version>
     <skip.schema>true</skip.schema>
   </properties>
   
@@ -65,7 +64,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
-        <version>2.2.1</version>
+        <version>2.2.2</version><!--$NO-MVN-MAN-VER$-->
         <executions>
           <execution>
             <id>assemble-docflex</id>
@@ -83,6 +82,58 @@
         </executions>
       </plugin>        
     </plugins>
+    <pluginManagement>
+    	<plugins>
+    		<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+    		<plugin>
+    			<groupId>org.eclipse.m2e</groupId>
+    			<artifactId>lifecycle-mapping</artifactId>
+    			<version>1.0.0</version>
+    			<configuration>
+    				<lifecycleMappingMetadata>
+    					<pluginExecutions>
+    						<pluginExecution>
+    							<pluginExecutionFilter>
+    								<groupId>
+    									org.apache.maven.plugins
+    								</groupId>
+    								<artifactId>
+    									maven-jar-plugin
+    								</artifactId>
+    								<versionRange>
+    									[2.3.1,)
+    								</versionRange>
+    								<goals>
+    									<goal>jar</goal>
+    								</goals>
+    							</pluginExecutionFilter>
+    							<action>
+    								<ignore></ignore>
+    							</action>
+    						</pluginExecution>
+    						<pluginExecution>
+    							<pluginExecutionFilter>
+    								<groupId>org.codehaus.mojo</groupId>
+    								<artifactId>
+    									xmlbeans-maven-plugin
+    								</artifactId>
+    								<versionRange>
+    									[2.3.3,)
+    								</versionRange>
+    								<goals>
+    									<goal>xmlbeans</goal>
+    								</goals>
+    							</pluginExecutionFilter>
+    							<action>
+    								<ignore></ignore>
+    							</action>
+    						</pluginExecution>
+    					</pluginExecutions>
+    				</lifecycleMappingMetadata>
+    			</configuration>
+    		</plugin>
+    	</plugins>
+    </pluginManagement>
   </build>
   
   <profiles>

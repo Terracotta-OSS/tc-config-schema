@@ -2,7 +2,7 @@
 
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
   targetNamespace="http://www.terracotta.org/config"
-  xmlns="http://www.terracotta.org/config" version="6">
+  xmlns="http://www.terracotta.org/config" version="7">
 
   <xs:element name="tc-config">
     <xs:complexType>
@@ -100,190 +100,10 @@
             </xs:documentation>
           </xs:annotation>
         </xs:element>
-
-        <xs:element name="application" type="application" minOccurs="0">
-          <xs:annotation>
-            <xs:documentation>
-              This section contains items that affect the
-              core behavior of Terracotta as it relates to
-              your application. This data must be kept
-              consistent across clients and servers in
-              order for Terracotta to function properly,
-              and so the system will enforce this.
-            </xs:documentation>
-          </xs:annotation>
-        </xs:element>
       </xs:all>
     </xs:complexType>
   </xs:element>
-
-  <xs:simpleType name="class-expression">
-    <xs:restriction base="xs:token">
-      <xs:pattern value="(@[A-Za-z_0-9$\*\.]+ )*[@A-Za-z_0-9$\*\.]+\+?"/>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:simpleType name="method-expression">
-    <xs:restriction base="xs:token">
-      <xs:pattern value="(@[A-Za-z_0-9$\*\.]+ )*([A-Za-z_0-9$\*\.\[\] \+]+ )[A-Za-z_0-9$\*\.\+]+(\([A-Za-z_0-9$,\*\. \[\]]*\))"/>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:simpleType name="field-expression">
-    <xs:restriction base="xs:token">
-      <xs:pattern value="(@[A-Za-z_0-9$\*\.]+ ){0,1}([A-Za-z_0-9$\*\.\[\] \+]){2,}"/>
-    </xs:restriction>
-  </xs:simpleType>
-
-  <!--
-  <xs:simpleType name="method-name-expression">
-    <xs:restriction base="xs:token">
-      <xs:pattern value="[A-Za-z_0-9$\. \[\]]+(\([A-Za-z_0-9$,\. \[\]]*\))" />
-    </xs:restriction>
-  </xs:simpleType>
-  -->
-
-  <xs:simpleType name="lock-level">
-    <xs:restriction base="xs:token">
-      <xs:enumeration value="write" />
-      <xs:enumeration value="read" />
-      <xs:enumeration value="concurrent" />
-      <xs:enumeration value="synchronous-write" />
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:complexType name="named-lock">
-    <xs:all>
-      <xs:element name="lock-name" type="java-identifier" />
-      <xs:element name="method-expression" type="method-expression" />
-      <xs:element name="lock-level" type="lock-level" minOccurs="0" />
-    </xs:all>
-  </xs:complexType>
-
-  <xs:complexType name="autolock">
-    <xs:all>
-      <xs:element name="method-expression" type="method-expression" />
-      <xs:element name="lock-level" type="lock-level" minOccurs="0" />
-    </xs:all>
-    <xs:attribute name="auto-synchronized" type="xs:boolean" default="false"/>
-  </xs:complexType>
-
-  <xs:complexType name="locks">
-    <xs:sequence maxOccurs="unbounded">
-      <xs:element name="autolock" type="autolock" minOccurs="0" />
-      <xs:element name="named-lock" type="named-lock" minOccurs="0" />
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="root">
-    <xs:annotation>
-      <xs:documentation>
-        Declares a DSO root. A root can have a name that defaults to its fully
-        qualified field name.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:all>
-      <xs:element name="root-name" type="qualified-class-name" minOccurs="0" maxOccurs="1" />
-      <xs:element name="field-name" type="qualified-field-name" minOccurs="0" maxOccurs="1" />
-      <xs:element name="field-expression" type="field-expression" minOccurs="0" maxOccurs="1" />
-    </xs:all>
-    <!--
-      switch to this later on and use substitutionGroup for members within
-      the choice section when xmlbeans actually support substitutionGroups
-
-    <xs:sequence minOccurs="1" maxOccurs="1">
-      <xs:element name="root-name" type="qualified-class-name" minOccurs="0" />
-      <xs:choice minOccurs="1" maxOccurs="1">
-        <xs:element name="field-name" type="qualified-field-name" />
-        <xs:element name="field-expression" type="field-expression" />
-      </xs:choice>
-    </xs:sequence>
-    -->
-  </xs:complexType>
-
-  <xs:complexType name="roots">
-    <xs:sequence>
-      <xs:element name="root" type="root" maxOccurs="unbounded" />
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="include">
-    <xs:all>
-      <xs:element name="class-expression" type="class-expression" />
-      <xs:element name="honor-transient" type="xs:boolean" minOccurs="0" default="false" />
-      <xs:element name="on-load" type="on-load" minOccurs="0" />
-    </xs:all>
-  </xs:complexType>
-
-  <xs:complexType name="on-load">
-    <xs:choice>
-      <xs:element name="execute" type="xs:string" />
-      <xs:element name="method" type="method-name" />
-    </xs:choice>
-  </xs:complexType>
-
-  <xs:complexType name="instrumented-classes">
-    <xs:sequence maxOccurs="unbounded">
-      <xs:element name="include" type="include" minOccurs="0" />
-      <xs:element name="exclude" type="class-expression" minOccurs="0" />
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="distributed-methods">
-    <xs:sequence>
-      <xs:element name="method-expression" maxOccurs="unbounded">
-        <xs:complexType>
-          <xs:simpleContent>
-            <xs:extension base="method-expression">
-              <xs:attribute name="run-on-all-nodes" type="xs:boolean" use="optional" default="true"/>
-            </xs:extension>
-          </xs:simpleContent>
-        </xs:complexType>
-      </xs:element>
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="web-applications">
-    <xs:sequence>
-      <xs:element name="web-application" type="web-application" maxOccurs="unbounded" />
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="web-application">
-    <xs:simpleContent>
-      <xs:extension base="xs:token">
-        <xs:attribute name="synchronous-write" type="xs:boolean" use="optional" default="false" />
-        <xs:attribute name="session-locking" type="xs:boolean" use="optional" default="true" />
-        <xs:attribute name="serialization" type="xs:boolean" use="optional" default="false" />
-      </xs:extension>
-    </xs:simpleContent>
-  </xs:complexType>
-
-  <xs:complexType name="app-groups">
-    <xs:sequence>
-      <xs:element name="app-group" type="app-group" maxOccurs="unbounded" />
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="app-group">
-    <xs:annotation>
-      <xs:documentation>
-        Identifies a set of web applications and/or named classloaders which can be substituted
-        at runtime for the purpose of loading shared data into different applications. For example,
-        two web applications running on different Terracotta nodes can share the same root, by
-        declaring both web applications to be in the same app-group; or a web application and a
-        command-line application can share a root by declaring the web application and the standard
-        system classloader to be in the same app-group. It is an error to declare the same
-        application in more than one app-group. Each Terracotta client node can only run at most
-        one application per app-group; for example, if web-applications A and B are in the same
-        app-group, it is an error to deploy both A and B to the same app server instance.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element name="web-application" type="xs:token" minOccurs="0" maxOccurs="unbounded" />
-      <xs:element name="named-classloader" type="xs:token" minOccurs="0" maxOccurs="unbounded" />
-    </xs:sequence>
-    <xs:attribute name="name" type="xs:string" use="required" />
-  </xs:complexType>
-
+  
   <xs:complexType name="instrumentation-logging">
     <xs:all>
       <xs:element name="class" type="xs:boolean" minOccurs="0" default="false" />
@@ -294,7 +114,7 @@
       <xs:element name="distributed-methods" type="xs:boolean" minOccurs="0" default="false" />
     </xs:all>
   </xs:complexType>
-
+  
   <xs:complexType name="runtime-logging">
     <xs:all>
       <xs:element name="non-portable-dump" type="xs:boolean" minOccurs="0" default="true">
@@ -313,37 +133,6 @@
       <xs:element name="named-loader-debug" type="xs:boolean" minOccurs="0" default="false" />
     </xs:all>
   </xs:complexType>
-  <xs:complexType name="additional-boot-jar-classes">
-    <xs:sequence>
-      <xs:element name="include" type="qualified-class-name" maxOccurs="unbounded" />
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="transient-fields">
-    <xs:sequence>
-      <xs:element name="field-name" type="qualified-field-name" maxOccurs="unbounded" />
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="injected-instances">
-    <xs:sequence>
-      <xs:element name="injected-field" type="injected-field" maxOccurs="unbounded" />
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="injected-field">
-    <xs:annotation>
-      <xs:documentation>
-        Declares a class field into which an instance will be injected by DSO.
-        The type of the instance is by default specified by the type of the field, but it
-        can also be specified by the instance-type element if needed.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:all>
-      <xs:element name="field-name" type="qualified-field-name" minOccurs="1" maxOccurs="1" />
-      <xs:element name="instance-type" type="qualified-class-name" minOccurs="0" maxOccurs="1" />
-    </xs:all>
-  </xs:complexType>
 
   <xs:complexType name="runtime-output-options">
     <xs:all>
@@ -352,14 +141,14 @@
       <xs:element name="full-stack" type="xs:boolean" minOccurs="0" default="false" />
     </xs:all>
   </xs:complexType>
-
+  
   <xs:complexType name="dso-client-debugging">
     <xs:all>
       <xs:element name="instrumentation-logging" type="instrumentation-logging" minOccurs="0" />
       <xs:element name="runtime-logging" type="runtime-logging" minOccurs="0" />
       <xs:element name="runtime-output-options" type="runtime-output-options" minOccurs="0" />
     </xs:all>
-  </xs:complexType>
+  </xs:complexType>  
 
   <xs:complexType name="dso-client-data">
     <xs:all>
@@ -367,7 +156,7 @@
       <xs:element name="debugging" type="dso-client-debugging" minOccurs="0" maxOccurs="1"/>
     </xs:all>
   </xs:complexType>
-
+  
   <xs:complexType name="garbage-collection">
     <xs:all>
       <xs:element name="enabled" type="xs:boolean" minOccurs="0" default="true" />
@@ -403,60 +192,6 @@
       <xs:element name="persistence" type="persistence" minOccurs="0" maxOccurs="1"/>
       <xs:element name="garbage-collection" type="garbage-collection" minOccurs="0" maxOccurs="1" />
     </xs:all>
-  </xs:complexType>
-
-  <xs:complexType name="module">
-    <xs:annotation>
-      <xs:documentation>
-        Identifies a module/version to use, this module must be located
-        in either a) the default repository shipped with Terracotta or
-        b) one of the repositories listed in the <![CDATA[<module>]]>
-        section.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:attribute name="name" type="xs:string" use="required" />
-    <xs:attribute name="version" type="xs:string" />
-    <xs:attribute name="group-id" type="xs:string" default="org.terracotta.modules" />
-  </xs:complexType>
-
-  <xs:complexType name="modules">
-    <xs:sequence maxOccurs="unbounded">
-      <xs:element name="repository" type="xs:string" minOccurs="0" maxOccurs="1"/>
-      <xs:element name="module" type="module" minOccurs="0" maxOccurs="1"/>
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="dso-application">
-    <xs:all>
-      <xs:element name="instrumented-classes" type="instrumented-classes" minOccurs="0" />
-      <xs:element name="transient-fields" type="transient-fields" minOccurs="0" />
-      <xs:element name="injected-instances" type="injected-instances" minOccurs="0" />
-
-      <xs:element name="locks" type="locks" minOccurs="0" />
-      <xs:element name="roots" type="roots" minOccurs="0" />
-      <xs:element name="distributed-methods" type="distributed-methods" minOccurs="0" />
-
-      <xs:element name="additional-boot-jar-classes" type="additional-boot-jar-classes" minOccurs="0" />
-      <xs:element name="web-applications" type="web-applications" minOccurs="0" />
-      <xs:element name="app-groups" type="app-groups" minOccurs="0" />
-
-      <xs:element name="dso-reflection-enabled" type="xs:boolean" minOccurs="0" default="true"/>
-    </xs:all>
-  </xs:complexType>
-
-  <xs:complexType name="non-distributed-fields">
-    <xs:sequence>
-      <xs:element name="non-distributed-field" type="java-identifier" minOccurs="0" maxOccurs="unbounded" />
-    </xs:sequence>
-    <xs:attribute name="name" type="xs:string" use="required" />
-  </xs:complexType>
-
-  <xs:complexType name='session-support'>
-    <xs:simpleContent>
-      <xs:extension base='xs:boolean'>
-        <xs:attribute name="session-locking" type="xs:boolean" use="optional" default="true" />
-      </xs:extension>
-    </xs:simpleContent>
   </xs:complexType>
 
   <xs:complexType name="authentication-mode">
@@ -783,15 +518,6 @@
       </xs:documentation>
     </xs:annotation>
     <xs:all>
-      <xs:element name="modules" type="modules"
-        minOccurs="0" maxOccurs="1">
-        <xs:annotation>
-          <xs:documentation>
-            This section contains the list of modules to use in
-            the client.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
       <xs:element name="logs" type="path" minOccurs="0" maxOccurs="1"
         default="logs-%i">
         <xs:annotation>
@@ -831,35 +557,10 @@
             that's specific to the DSO client only.
           </xs:documentation>
         </xs:annotation>
-      </xs:element>
+      </xs:element>      
     </xs:all>
   </xs:complexType>
-
-  <xs:complexType name="application">
-    <xs:annotation>
-      <xs:documentation>
-        This section contains items that affect the core
-        behavior of Terracotta as it relates to your
-        application. This data must be kept consistent across
-        clients and servers in order for Terracotta to function
-        properly, and so the system will enforce this; see the
-        comments for the 'configuration-model' switch, above,
-        for more details.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:all>
-      <xs:element name="dso" type="dso-application"
-        minOccurs="0">
-        <xs:annotation>
-          <xs:documentation>
-            This section controls how Terracotta DSO behaves
-            in your application.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-    </xs:all>
-  </xs:complexType>
-
+  
   <xs:complexType name="servers">
     <xs:annotation>
       <xs:documentation>
@@ -1157,58 +858,5 @@
         value="[A-Za-z_][A-Za-z_0-9$]*(\.[A-Za-z_][A-Za-z_0-9$]*)*" />
     </xs:restriction>
   </xs:simpleType>
-
-  <xs:simpleType name="class-name">
-    <xs:restriction base="xs:token">
-      <xs:pattern value="[A-Za-z_][A-Za-z_0-9$]*" />
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="qualified-field-name">
-    <xs:restriction base="xs:token">
-      <xs:pattern
-        value="[A-Za-z_][A-Za-z_0-9$]*(\.[A-Za-z_][A-Za-z_0-9$]*)+" />
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="field-name">
-    <xs:restriction base="xs:token">
-      <xs:pattern value="[A-Za-z_][A-Za-z_0-9$]*" />
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="method-name">
-    <xs:restriction base="xs:token">
-      <xs:pattern value="[A-Za-z_][A-Za-z_0-9$]*" />
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="qualified-method-name">
-    <xs:restriction base="xs:token">
-      <xs:pattern
-        value="[A-Za-z_][A-Za-z_0-9$]*(\.[A-Za-z_][A-Za-z_0-9$]*)+" />
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="optionally-qualified-method-name">
-    <xs:restriction base="xs:token">
-      <xs:pattern
-        value="[A-Za-z_][A-Za-z_0-9$]*(\.[A-Za-z_][A-Za-z_0-9$]*)*" />
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="java-identifier">
-    <xs:restriction base="xs:token">
-      <xs:pattern value="[A-Za-z_][A-Za-z_0-9$]*" />
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:element name="dso" type="dso-application">
-    <xs:annotation>
-      <xs:documentation>
-        Terracotta Plug-in configuration element
-      </xs:documentation>
-    </xs:annotation>
-  </xs:element>
 
 </xs:schema>
