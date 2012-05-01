@@ -756,6 +756,12 @@
 
   </xs:complexType>
 
+  <xs:complexType name="security">
+    <xs:all>
+      <xs:element name="enabled" type="xs:boolean" minOccurs="0" maxOccurs="1" default="false"/>
+    </xs:all>
+  </xs:complexType>
+
   <xs:complexType name="client">
     <xs:annotation>
       <xs:documentation>
@@ -889,6 +895,7 @@
     </xs:annotation>
     <xs:sequence minOccurs="0" maxOccurs="1">
       <xs:element name="server" type="server" maxOccurs="unbounded" />
+      <xs:element name="security" type="security" maxOccurs="1" minOccurs="0" />
       <xs:element name="mirror-groups" type="mirror-groups" maxOccurs="1" minOccurs="0" />
       <xs:element name="ha" type="ha" maxOccurs="1" minOccurs="0" />
       <xs:element name="update-check" type="update-check" maxOccurs="1" minOccurs="0"></xs:element>
