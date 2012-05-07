@@ -745,6 +745,14 @@
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
+    <xs:attribute name="security-alias" type="non-blank-token"
+      use="optional">
+      <xs:annotation>
+        <xs:documentation>
+          The security key alias of the server.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
     <xs:attribute name="bind" type="non-blank-token" use="optional" default="0.0.0.0">
       <xs:annotation>
         <xs:documentation>
@@ -759,6 +767,8 @@
   <xs:complexType name="security">
     <xs:all>
       <xs:element name="enabled" type="xs:boolean" minOccurs="0" maxOccurs="1" default="false"/>
+      <xs:element name="keystore" type="non-blank-token" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="truststore" type="non-blank-token" minOccurs="0" maxOccurs="1"/>
     </xs:all>
   </xs:complexType>
 
