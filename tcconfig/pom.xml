@@ -16,7 +16,7 @@
   <name>tcconfig</name>
   
   <properties>
-    <schema.version>6</schema.version>
+    <schema.version>7</schema.version>
     <skip.schema>true</skip.schema>
   </properties>
   
