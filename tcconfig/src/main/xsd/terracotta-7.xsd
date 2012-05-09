@@ -376,6 +376,12 @@
     </xs:all>
   </xs:complexType>
 
+  <xs:complexType name="ssl">
+    <xs:all>
+      <xs:element name="certificate" type="non-blank-token" minOccurs="1" maxOccurs="1" />
+    </xs:all>
+  </xs:complexType>
+
   <xs:simpleType name="persistence-mode">
     <xs:restriction base="xs:token">
       <xs:enumeration value="temporary-swap-only" />
@@ -402,6 +408,12 @@
       <xs:element name="client-reconnect-window" type="non-negative-int" minOccurs="0" maxOccurs="1" default="120" />
       <xs:element name="persistence" type="persistence" minOccurs="0" maxOccurs="1"/>
       <xs:element name="garbage-collection" type="garbage-collection" minOccurs="0" maxOccurs="1" />
+    </xs:all>
+  </xs:complexType>
+
+  <xs:complexType name="security">
+    <xs:all>
+      <xs:element name="ssl" type="ssl" minOccurs="0" maxOccurs="1" />
     </xs:all>
   </xs:complexType>
 
@@ -726,7 +738,17 @@
           </xs:documentation>
         </xs:annotation>
       </xs:element>
+
+      <xs:element name="security" type="security" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>
+            Configuration of this server's security, ie: SSL and
+            authentication.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
     </xs:all>
+    
     <xs:attribute name="host" type="host" use="optional">
       <xs:annotation>
         <xs:documentation>
@@ -745,14 +767,6 @@
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
-    <xs:attribute name="security-alias" type="non-blank-token"
-      use="optional">
-      <xs:annotation>
-        <xs:documentation>
-          The security key alias of the server.
-        </xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
     <xs:attribute name="bind" type="non-blank-token" use="optional" default="0.0.0.0">
       <xs:annotation>
         <xs:documentation>
@@ -762,14 +776,6 @@
       </xs:annotation>
     </xs:attribute>
 
-  </xs:complexType>
-
-  <xs:complexType name="security">
-    <xs:all>
-      <xs:element name="enabled" type="xs:boolean" minOccurs="0" maxOccurs="1" default="false"/>
-      <xs:element name="keystore" type="non-blank-token" minOccurs="0" maxOccurs="1"/>
-      <xs:element name="truststore" type="non-blank-token" minOccurs="0" maxOccurs="1"/>
-    </xs:all>
   </xs:complexType>
 
   <xs:complexType name="client">
@@ -905,11 +911,11 @@
     </xs:annotation>
     <xs:sequence minOccurs="0" maxOccurs="1">
       <xs:element name="server" type="server" maxOccurs="unbounded" />
-      <xs:element name="security" type="security" maxOccurs="1" minOccurs="0" />
       <xs:element name="mirror-groups" type="mirror-groups" maxOccurs="1" minOccurs="0" />
       <xs:element name="ha" type="ha" maxOccurs="1" minOccurs="0" />
-      <xs:element name="update-check" type="update-check" maxOccurs="1" minOccurs="0"></xs:element>
+      <xs:element name="update-check" type="update-check" maxOccurs="1" minOccurs="0" />
     </xs:sequence>
+    <xs:attribute name="secure" type="xs:boolean" use="optional" default="false" />
   </xs:complexType>
 
   <xs:complexType name="bind-port">
