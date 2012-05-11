@@ -385,8 +385,16 @@
   <xs:complexType name="keychain">
     <xs:all>
       <xs:element name="class" type="non-blank-token" minOccurs="0" maxOccurs="1" default="com.terracotta.management.keychain.FileStoreKeyChain" />
-      <xs:element name="url" type="non-blank-token" minOccurs="0" maxOccurs="1" />
+      <xs:element name="url" type="non-blank-token" minOccurs="1" maxOccurs="1" />
       <xs:element name="secret-provider" type="non-blank-token" minOccurs="0" maxOccurs="1" />
+    </xs:all>
+  </xs:complexType>
+
+  <xs:complexType name="auth">
+    <xs:all>
+      <xs:element name="realm" type="non-blank-token" minOccurs="0" maxOccurs="1" default="org.apache.shiro.realm.text.IniRealm" />
+      <xs:element name="url" type="non-blank-token" minOccurs="1" maxOccurs="1" />
+      <xs:element name="user" type="non-blank-token" minOccurs="0" maxOccurs="1" default="terracotta" />
     </xs:all>
   </xs:complexType>
 
@@ -423,6 +431,7 @@
     <xs:all>
       <xs:element name="ssl" type="ssl" minOccurs="0" maxOccurs="1" />
       <xs:element name="keychain" type="keychain" minOccurs="1" maxOccurs="1" />
+      <xs:element name="auth" type="auth" minOccurs="1" maxOccurs="1" />
     </xs:all>
   </xs:complexType>
 
