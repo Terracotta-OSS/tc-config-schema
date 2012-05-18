@@ -429,7 +429,7 @@
 
   <xs:complexType name="security">
     <xs:all>
-      <xs:element name="ssl" type="ssl" minOccurs="0" maxOccurs="1" />
+      <xs:element name="ssl" type="ssl" minOccurs="1" maxOccurs="1" />
       <xs:element name="keychain" type="keychain" minOccurs="1" maxOccurs="1" />
       <xs:element name="auth" type="auth" minOccurs="1" maxOccurs="1" />
     </xs:all>
