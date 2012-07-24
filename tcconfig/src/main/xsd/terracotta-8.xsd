@@ -165,6 +165,36 @@
     </xs:all>
   </xs:complexType>
 
+  <xs:complexType name="security">
+    <xs:all>
+      <xs:element name="ssl" type="ssl" minOccurs="1" maxOccurs="1" />
+      <xs:element name="keychain" type="keychain" minOccurs="1" maxOccurs="1" />
+      <xs:element name="auth" type="auth" minOccurs="1" maxOccurs="1" />
+    </xs:all>
+  </xs:complexType>
+
+  <xs:complexType name="ssl">
+    <xs:all>
+      <xs:element name="certificate" type="non-blank-token" minOccurs="1" maxOccurs="1" />
+    </xs:all>
+  </xs:complexType>
+
+  <xs:complexType name="keychain">
+    <xs:all>
+      <xs:element name="class" type="non-blank-token" minOccurs="0" maxOccurs="1" default="com.terracotta.management.keychain.FileStoreKeyChain" />
+      <xs:element name="url" type="non-blank-token" minOccurs="1" maxOccurs="1" />
+      <xs:element name="secret-provider" type="non-blank-token" minOccurs="0" maxOccurs="1" />
+    </xs:all>
+  </xs:complexType>
+
+  <xs:complexType name="auth">
+    <xs:all>
+      <xs:element name="realm" type="non-blank-token" minOccurs="0" maxOccurs="1" default="com.tc.net.core.security.ShiroIniRealm" />
+      <xs:element name="url" type="non-blank-token" minOccurs="1" maxOccurs="1" />
+      <xs:element name="user" type="non-blank-token" minOccurs="0" maxOccurs="1" default="terracotta" />
+    </xs:all>
+  </xs:complexType>
+
   <xs:simpleType name="persistence-mode">
     <xs:restriction base="xs:token">
       <xs:enumeration value="temporary-swap-only" />
@@ -461,7 +491,17 @@
           </xs:documentation>
         </xs:annotation>
       </xs:element>
+
+      <xs:element name="security" type="security" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>
+            Configuration of this server's security, ie: SSL and
+            authentication.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
     </xs:all>
+    
     <xs:attribute name="host" type="host" use="optional">
       <xs:annotation>
         <xs:documentation>
@@ -594,6 +634,7 @@
       <xs:element name="ha" type="ha" maxOccurs="1" minOccurs="0" />
       <xs:element name="update-check" type="update-check" maxOccurs="1" minOccurs="0"></xs:element>
     </xs:sequence>
+    <xs:attribute name="secure" type="xs:boolean" use="optional" default="false" />
   </xs:complexType>
 
   <xs:complexType name="bind-port">
