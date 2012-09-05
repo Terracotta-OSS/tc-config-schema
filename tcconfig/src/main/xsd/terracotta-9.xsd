@@ -170,6 +170,7 @@
       <xs:element name="ssl" type="ssl" minOccurs="1" maxOccurs="1" />
       <xs:element name="keychain" type="keychain" minOccurs="1" maxOccurs="1" />
       <xs:element name="auth" type="auth" minOccurs="1" maxOccurs="1" />
+      <xs:element name="management" type="management" minOccurs="0" maxOccurs="1" />
     </xs:all>
   </xs:complexType>
 
@@ -192,6 +193,13 @@
       <xs:element name="realm" type="non-blank-token" minOccurs="0" maxOccurs="1" default="com.tc.net.core.security.ShiroIniRealm" />
       <xs:element name="url" type="non-blank-token" minOccurs="1" maxOccurs="1" />
       <xs:element name="user" type="non-blank-token" minOccurs="0" maxOccurs="1" default="terracotta" />
+    </xs:all>
+  </xs:complexType>
+
+  <xs:complexType name="management">
+    <xs:all>
+      <xs:element name="ia" type="non-blank-token" minOccurs="0" maxOccurs="1" />
+      <xs:element name="timeout" type="non-negative-int" minOccurs="0" maxOccurs="1" />
     </xs:all>
   </xs:complexType>
 
