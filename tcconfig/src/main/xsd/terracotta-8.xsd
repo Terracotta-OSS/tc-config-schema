@@ -204,12 +204,9 @@
     </xs:all>
   </xs:complexType>
 
-  <xs:simpleType name="persistence-mode">
-    <xs:restriction base="xs:token">
-      <xs:enumeration value="temporary-swap-only" />
-      <xs:enumeration value="permanent-store" />
-    </xs:restriction>
-  </xs:simpleType>
+  <xs:complexType name="restartable">
+    <xs:attribute name="enabled" use="optional" type="xs:boolean" default="false"/>
+  </xs:complexType>
   
   <xs:complexType name="offheap">
     <xs:sequence>
@@ -220,7 +217,7 @@
 
   <xs:complexType name="persistence">
     <xs:all>
-      <xs:element name="mode" type="persistence-mode" minOccurs="0" maxOccurs="1" default="temporary-swap-only" />
+      <xs:element name="restartable" type="restartable" minOccurs="0" maxOccurs="1"/>
       <xs:element name="offheap" type="offheap" minOccurs="0" maxOccurs="1" />
     </xs:all>
   </xs:complexType>
