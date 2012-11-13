@@ -104,17 +104,6 @@
     </xs:complexType>
   </xs:element>
   
-  <xs:complexType name="instrumentation-logging">
-    <xs:all>
-      <xs:element name="class" type="xs:boolean" minOccurs="0" default="false" />
-      <xs:element name="hierarchy" type="xs:boolean" minOccurs="0" default="true" />
-      <xs:element name="locks" type="xs:boolean" minOccurs="0" default="false" />
-      <xs:element name="transient-root" type="xs:boolean" minOccurs="0" default="true" />
-      <xs:element name="roots" type="xs:boolean" minOccurs="0" default="false" />
-      <xs:element name="distributed-methods" type="xs:boolean" minOccurs="0" default="false" />
-    </xs:all>
-  </xs:complexType>
-  
   <xs:complexType name="runtime-logging">
     <xs:all>
       <xs:element name="non-portable-dump" type="xs:boolean" minOccurs="0" default="true">
@@ -144,7 +133,6 @@
   
   <xs:complexType name="dso-client-debugging">
     <xs:all>
-      <xs:element name="instrumentation-logging" type="instrumentation-logging" minOccurs="0" />
       <xs:element name="runtime-logging" type="runtime-logging" minOccurs="0" />
       <xs:element name="runtime-output-options" type="runtime-output-options" minOccurs="0" />
     </xs:all>
