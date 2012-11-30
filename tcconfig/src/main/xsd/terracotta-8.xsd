@@ -23,17 +23,6 @@
           </xs:annotation>
         </xs:element>
 
-        <xs:element name="system" type="system" minOccurs="0">
-          <xs:annotation>
-            <xs:documentation>
-              The 'system' section contains configuration
-              data that affects the entire Terracotta
-              system as a whole; things like the configuration
-              mode go here.
-            </xs:documentation>
-          </xs:annotation>
-        </xs:element>
-
         <xs:element name="servers" type="servers" minOccurs="0">
           <xs:annotation>
             <xs:documentation>
@@ -104,47 +93,6 @@
     </xs:complexType>
   </xs:element>
   
-  <xs:complexType name="runtime-logging">
-    <xs:all>
-      <xs:element name="non-portable-dump" type="xs:boolean" minOccurs="0" default="true">
-        <xs:annotation>
-          <xs:documentation xmlns="http://www.w3.org/1999/xhtml">
-            When an attempt is made to distribute a non-portable object, the object (and any objects
-            to which it refers) will be logged in the terracotta log file.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name="lock-debug" type="xs:boolean" minOccurs="0" default="false" />
-      <xs:element name="field-change-debug" type="xs:boolean" minOccurs="0" default="false" />
-      <xs:element name="wait-notify-debug" type="xs:boolean" minOccurs="0" default="false" />
-      <xs:element name="distributed-method-debug" type="xs:boolean" minOccurs="0" default="false" />
-      <xs:element name="new-object-debug" type="xs:boolean" minOccurs="0" default="false" />
-      <xs:element name="named-loader-debug" type="xs:boolean" minOccurs="0" default="false" />
-    </xs:all>
-  </xs:complexType>
-
-  <xs:complexType name="runtime-output-options">
-    <xs:all>
-      <xs:element name="auto-lock-details" type="xs:boolean" minOccurs="0" default="false" />
-      <xs:element name="caller" type="xs:boolean" minOccurs="0" default="false" />
-      <xs:element name="full-stack" type="xs:boolean" minOccurs="0" default="false" />
-    </xs:all>
-  </xs:complexType>
-  
-  <xs:complexType name="dso-client-debugging">
-    <xs:all>
-      <xs:element name="runtime-logging" type="runtime-logging" minOccurs="0" />
-      <xs:element name="runtime-output-options" type="runtime-output-options" minOccurs="0" />
-    </xs:all>
-  </xs:complexType>  
-
-  <xs:complexType name="dso-client-data">
-    <xs:all>
-      <xs:element name="fault-count" type="non-negative-int" default="500" minOccurs="0" maxOccurs="1"/>
-      <xs:element name="debugging" type="dso-client-debugging" minOccurs="0" maxOccurs="1"/>
-    </xs:all>
-  </xs:complexType>
-  
   <xs:complexType name="garbage-collection">
     <xs:all>
       <xs:element name="enabled" type="xs:boolean" minOccurs="0" default="true" />
@@ -207,14 +155,6 @@
     <xs:all>
       <xs:element name="restartable" type="restartable" minOccurs="0" maxOccurs="1"/>
       <xs:element name="offheap" type="offheap" minOccurs="0" maxOccurs="1" />
-    </xs:all>
-  </xs:complexType>
-
-  <xs:complexType name="dso-server-data">
-    <xs:all>
-      <xs:element name="client-reconnect-window" type="non-negative-int" minOccurs="0" maxOccurs="1" default="120" />
-      <xs:element name="persistence" type="persistence" minOccurs="0" maxOccurs="1"/>
-      <xs:element name="garbage-collection" type="garbage-collection" minOccurs="0" maxOccurs="1" />
     </xs:all>
   </xs:complexType>
 
@@ -314,10 +254,6 @@
           <br/>
           The format of the properties file is:
       <p>  username: password [,rolename ...]</p>
-      The supported roles and protected sections are:
-      <ul>
-        <li><code>statistics</code> (for the statistics gatherer at <code>/statistics-gatherer</code>)</li>
-      </ul>
       Passwords may be clear text, obfuscated or checksummed. The class <code>com.mortbay.Util.Password</code> should be used to generate obfuscated passwords or password checksums.
           </xs:documentation>
         </xs:annotation>
@@ -408,33 +344,7 @@
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name="statistics" type="path" minOccurs="0" maxOccurs="1"
-        default="statistics">
-        <xs:annotation>
-          <xs:documentation>
-            In which directory should the server store statistics
-            data that is being buffered? Again, this value undergoes
-            parameter substitution before being used; thus, a value
-            like 'statistics-data-%h' would expand to
-            'statistics-data' if running on host
-            'artichoke'.
-
-            If this is a relative path, then it is
-            interpreted relative to the current working
-            directory of the server (that is, the directory
-            you were in when you started server). It is thus
-            recommended that you specify an absolute path
-            here.
-
-            Default: 'statistics'
-
-            This places the 'statistics' directory in the
-            directory you were in when you invoked
-            'start-tc-server'.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name="dso-port" type="bind-port" minOccurs="0" maxOccurs="1"
+      <xs:element name="tsa-port" type="bind-port" minOccurs="0" maxOccurs="1"
         default="9510">
         <xs:annotation>
           <xs:documentation>
@@ -458,11 +368,11 @@
             privileges to use on Unix-style systems (Linux,
             Solaris).
 
-            Default: "dso-port" + 10
+            Default: "tsa-port" + 10
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name="l2-group-port" type="bind-port" minOccurs="0" maxOccurs="1">
+      <xs:element name="tsa-group-port" type="bind-port" minOccurs="0" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>
             Port for server to server communication which must
@@ -471,20 +381,14 @@
             below 1024 typically require 'root' privileges to
             use on Unix-style systems (Linux, Solaris).
 
-            Default: "dso-port" + 20
+            Default: "tsa-port" + 20
           </xs:documentation>
         </xs:annotation>
       </xs:element>
 
-      <xs:element name="dso" type="dso-server-data"
-        minOccurs="0">
-        <xs:annotation>
-          <xs:documentation>
-            Configuration data for DSO that's specific to
-            the DSO server.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
+      <xs:element name="client-reconnect-window" type="non-negative-int" minOccurs="0" maxOccurs="1" default="120" />
+      <xs:element name="persistence" type="persistence" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="garbage-collection" type="garbage-collection" minOccurs="0" maxOccurs="1" />
 
       <xs:element name="security" type="security" minOccurs="0">
         <xs:annotation>
@@ -510,7 +414,7 @@
       <xs:annotation>
         <xs:documentation>
           The symbolic name of the server, expansion parameters may
-          be used.  Defaults to "host:dso-port".
+          be used.  Defaults to "host:tsa-port".
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
@@ -583,15 +487,6 @@
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name="dso" type="dso-client-data"
-        minOccurs="0" maxOccurs="1">
-        <xs:annotation>
-          <xs:documentation>
-            This section contains data for Terracotta DSO
-            that's specific to the DSO client only.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>      
     </xs:all>
   </xs:complexType>
   
@@ -676,120 +571,6 @@
     <xs:sequence minOccurs="1" maxOccurs="unbounded">
       <xs:element name="member" type="non-blank-token" />
     </xs:sequence>
-  </xs:complexType>
-
-  <xs:simpleType name="configuration-model">
-    <xs:annotation>
-      <xs:documentation>
-        The configuration model: 'development' or 'production'.
-
-        The clients can each have their own configuration
-        file or all use the server's configuration file.
-
-        The server's configuration file is located at
-        http://localhost:9515/config
-
-        If the configuration model is production then the
-        'application' section for all of the clients comes
-        from the application section of the server's config
-        file.
-
-        If the configuration model is development then each
-        of the clients's 'application' section is determined
-        by their own configuration file.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="xs:token">
-      <xs:enumeration value="development" />
-      <xs:enumeration value="production" />
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="license-type">
-    <xs:annotation>
-      <xs:documentation>
-        What type of license is in use? This can be 'trial' or
-        'production', and does not affect the behavior of the
-        system other than ensuring that the license in use
-        matches this type. (This prevents you from accidentally
-        putting a trial license onto your production server and
-        then panicking thirty days later when that license
-        expires.)
-        DEPRECATED: license file must be installed to Terracotta
-        installation directory.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="xs:token">
-      <xs:enumeration value="none" />
-      <xs:enumeration value="trial" />
-      <xs:enumeration value="production" />
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:complexType name="license">
-    <xs:all>
-      <xs:element name="location" type="path">
-        <xs:annotation>
-          <xs:documentation>
-            Where is the license file? Each server must have
-            access to this file (which may be a relative or
-            absolute path). This item can use parameter
-            substitution, which allows you to insert data
-            like '%h' and have it expand to the current
-            hostname; this allows flexibility in the case
-            where different servers have their license file
-            in different locations.
-            DEPRECATED: license file must be installed to Terracotta
-            installation directory.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name="type" type="license-type"
-        default="none">
-        <xs:annotation>
-          <xs:documentation>
-            What type of license is in use? This can be
-            'trial' or 'production', and does not affect the
-            behavior of the system other than ensuring that
-            the license in use matches this type. (This
-            prevents you from accidentally putting a trial
-            license onto your production server and then
-            panicking thirty days later when that license
-            expires.)
-            DEPRECATED: license file must be installed to Terracotta
-            installation directory.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-    </xs:all>
-  </xs:complexType>
-
-  <xs:complexType name="system">
-    <xs:annotation>
-      <xs:documentation>
-        The 'system' section contains configuration data that
-        affects the entire Terracotta system as a whole; things
-        like whether to activate DSO services go here.
-      </xs:documentation>
-    </xs:annotation>
-    <xs:all>
-      <xs:element name="license" type="license" minOccurs="0">
-        <xs:annotation>
-          <xs:documentation>
-            The 'license' element requires a 'location' and
-            'type' to be specified. If you omit the
-            'license' element, Terracotta will run in a
-            limited 'initial' mode, which limits server
-            runtime and limits the maximum number of
-            simultaneously-connected clients.
-            DEPRECATED: license file must be installed to Terracotta
-            installation directory.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element name="configuration-model"
-        type="configuration-model" minOccurs="0" default="development" />
-    </xs:all>
   </xs:complexType>
 
   <xs:simpleType name="ha-mode">

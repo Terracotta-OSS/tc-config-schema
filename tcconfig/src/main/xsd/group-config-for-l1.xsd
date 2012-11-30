@@ -18,7 +18,7 @@
 	<xs:complexType name="server-info">
 		<xs:sequence minOccurs="1" maxOccurs="1">
 			<xs:element name="name" type="xs:string" />
-			<xs:element name="dso-port" type="xs:integer" />
+			<xs:element name="tsa-port" type="xs:integer" />
 		</xs:sequence>
 	</xs:complexType>
 	<xs:element name="groupname-id-map">
