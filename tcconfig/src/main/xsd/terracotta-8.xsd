@@ -151,13 +151,6 @@
     </xs:sequence>
   </xs:complexType>
 
-  <xs:complexType name="persistence">
-    <xs:all>
-      <xs:element name="restartable" type="restartable" minOccurs="0" maxOccurs="1"/>
-      <xs:element name="offheap" type="offheap" minOccurs="0" maxOccurs="1" />
-    </xs:all>
-  </xs:complexType>
-
   <xs:complexType name="authentication-mode">
     <xs:annotation>
       <xs:documentation xmlns="http://www.w3.org/1999/xhtml">Describes the authentication mode,
@@ -224,7 +217,10 @@
         Data specific to one of your servers.
       </xs:documentation>
     </xs:annotation>
+
     <xs:all>
+      <xs:element name="offheap" type="offheap" minOccurs="0" maxOccurs="1" />
+    
       <xs:element name="authentication" type="authentication" minOccurs="0">
         <xs:annotation>
           <xs:documentation xmlns="http://www.w3.org/1999/xhtml"> Turn on JMX authentication for the Terracotta Server, Enterprise Edition.
@@ -386,10 +382,6 @@
         </xs:annotation>
       </xs:element>
 
-      <xs:element name="client-reconnect-window" type="non-negative-int" minOccurs="0" maxOccurs="1" default="120" />
-      <xs:element name="persistence" type="persistence" minOccurs="0" maxOccurs="1"/>
-      <xs:element name="garbage-collection" type="garbage-collection" minOccurs="0" maxOccurs="1" />
-
       <xs:element name="security" type="security" minOccurs="0">
         <xs:annotation>
           <xs:documentation>
@@ -517,11 +509,14 @@
         server configuration from this file.
       </xs:documentation>
     </xs:annotation>
-    <xs:sequence minOccurs="0" maxOccurs="1">
+    <xs:sequence maxOccurs="1" minOccurs="0">
       <xs:element name="server" type="server" maxOccurs="unbounded" />
       <xs:element name="mirror-groups" type="mirror-groups" maxOccurs="1" minOccurs="0" />
       <xs:element name="ha" type="ha" maxOccurs="1" minOccurs="0" />
-      <xs:element name="update-check" type="update-check" maxOccurs="1" minOccurs="0"></xs:element>
+      <xs:element name="update-check" type="update-check" maxOccurs="1" minOccurs="0" />
+      <xs:element name="garbage-collection" type="garbage-collection" minOccurs="0" maxOccurs="1" />
+      <xs:element name="restartable" type="restartable" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="client-reconnect-window" type="non-negative-int" minOccurs="0" maxOccurs="1" default="120" />
     </xs:sequence>
     <xs:attribute name="secure" type="xs:boolean" use="optional" default="false" />
   </xs:complexType>
