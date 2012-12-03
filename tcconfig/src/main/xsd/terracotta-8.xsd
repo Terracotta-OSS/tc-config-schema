@@ -512,7 +512,7 @@
     <xs:sequence maxOccurs="1" minOccurs="0">
       <xs:element name="server" type="server" maxOccurs="unbounded" />
       <xs:element name="mirror-groups" type="mirror-groups" maxOccurs="1" minOccurs="0" />
-      <xs:element name="ha" type="ha" maxOccurs="1" minOccurs="0" />
+      <xs:element name="ha" type="ha" minOccurs="0" maxOccurs="1" />
       <xs:element name="update-check" type="update-check" maxOccurs="1" minOccurs="0" />
       <xs:element name="garbage-collection" type="garbage-collection" minOccurs="0" maxOccurs="1" />
       <xs:element name="restartable" type="restartable" minOccurs="0" maxOccurs="1"/>
