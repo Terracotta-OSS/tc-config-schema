@@ -510,7 +510,7 @@
       </xs:documentation>
     </xs:annotation>
     <xs:sequence maxOccurs="1" minOccurs="0">
-      <xs:element name="server" type="server" maxOccurs="unbounded" />
+      <xs:element name="server" type="server" minOccurs="0" maxOccurs="unbounded" />
       <xs:element name="mirror-groups" type="mirror-groups" maxOccurs="1" minOccurs="0" />
       <xs:element name="ha" type="ha" minOccurs="0" maxOccurs="1" />
       <xs:element name="update-check" type="update-check" maxOccurs="1" minOccurs="0" />
