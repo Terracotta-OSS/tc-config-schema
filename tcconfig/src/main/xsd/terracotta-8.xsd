@@ -179,19 +179,6 @@
     </xs:all>
   </xs:complexType>
 
-  <xs:complexType name="ha">
-    <xs:all>
-      <xs:element name="mode" type="ha-mode" minOccurs="0" default="networked-active-passive" />
-      <xs:element name="networked-active-passive" type="networked-active-passive" minOccurs="0" />
-    </xs:all>
-  </xs:complexType>
-
-  <xs:complexType name="networked-active-passive">
-    <xs:all>
-      <xs:element name="election-time" type="positive-int" minOccurs="0" default="5" />
-    </xs:all>
-  </xs:complexType>
-
   <xs:complexType name="update-check">
     <xs:all>
       <xs:element name="enabled" type="xs:boolean" minOccurs="0" default="true"/>
@@ -371,8 +358,7 @@
       <xs:element name="tsa-group-port" type="bind-port" minOccurs="0" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>
-            Port for server to server communication which must
-            be indicated when HA mode is networked-active-passive.
+            Port for server to server communication.
             This can be any port you like, but note that ports
             below 1024 typically require 'root' privileges to
             use on Unix-style systems (Linux, Solaris).
@@ -512,7 +498,6 @@
     <xs:sequence maxOccurs="1" minOccurs="0">
       <xs:element name="server" type="server" minOccurs="0" maxOccurs="unbounded" />
       <xs:element name="mirror-groups" type="mirror-groups" maxOccurs="1" minOccurs="0" />
-      <xs:element name="ha" type="ha" minOccurs="0" maxOccurs="1" />
       <xs:element name="update-check" type="update-check" maxOccurs="1" minOccurs="0" />
       <xs:element name="garbage-collection" type="garbage-collection" minOccurs="0" maxOccurs="1" />
       <xs:element name="restartable" type="restartable" minOccurs="0" maxOccurs="1"/>
@@ -553,9 +538,9 @@
     </xs:annotation>
     <xs:all>
       <xs:element name="members" type="members" minOccurs="0" />
-      <xs:element name="ha" type="ha" minOccurs="0" maxOccurs="1"/>
     </xs:all>
-    <xs:attribute name="group-name" type="xs:string"/>
+    <xs:attribute name="group-name" type="xs:string" />
+    <xs:attribute name="election-time" type="positive-int" default="5" />
   </xs:complexType>
 
   <xs:complexType name="members">
@@ -567,13 +552,6 @@
       <xs:element name="member" type="non-blank-token" />
     </xs:sequence>
   </xs:complexType>
-
-  <xs:simpleType name="ha-mode">
-    <xs:restriction base="xs:token">
-      <xs:enumeration value="networked-active-passive" />
-      <xs:enumeration value="disk-based-active-passive" />
-    </xs:restriction>
-  </xs:simpleType>
 
   <xs:simpleType name="non-blank-token">
     <xs:restriction base="xs:token">
