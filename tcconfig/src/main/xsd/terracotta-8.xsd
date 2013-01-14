@@ -95,7 +95,7 @@
   
   <xs:complexType name="garbage-collection">
     <xs:all>
-      <xs:element name="enabled" type="xs:boolean" minOccurs="0" default="true" />
+      <xs:element name="enabled" type="xs:boolean" minOccurs="0" default="false" />
       <xs:element name="verbose" type="xs:boolean" minOccurs="0" default="false" />
       <xs:element name="interval" type="positive-int" minOccurs="0" default="3600" />
     </xs:all>
