@@ -247,8 +247,7 @@
         <xs:annotation>
           <xs:documentation>
             Where should the server store its persistent
-            data? (This includes stored object data for
-            DSO.) This value undergoes parameter
+            data? This value undergoes parameter
             substitution before being used; this allows you
             to use placeholders like '%h' (for the hostname)
             or '%(com.mycompany.propname)' (to substitute in
@@ -331,8 +330,8 @@
         default="9510">
         <xs:annotation>
           <xs:documentation>
-            On what port should the DSO server listen for
-            connections from DSO clients? This can be any
+            On what port should the server listen for
+            connections from clients? This can be any
             port you like, but note that ports below 1024
             typically require 'root' privileges to use on
             Unix-style systems (Linux, Solaris).
