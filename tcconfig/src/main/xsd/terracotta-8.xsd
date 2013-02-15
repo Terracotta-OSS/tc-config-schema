@@ -58,7 +58,7 @@
             </xs:documentation>
           </xs:annotation>
         </xs:element>
-        <xs:element name="clients" type="client" minOccurs="0">
+        <xs:element name="clients" type="clients" minOccurs="0">
           <xs:annotation>
             <xs:documentation>
               This section contains settings that affect
@@ -81,11 +81,7 @@
 
               For each client to have its own
               configuration you can set 'tc.config' to the
-              configuration file. If the configuration
-              model is production then the 'application'
-              section for all of the clients comes from
-              the application section of the server's
-              config file.
+              configuration file. 
             </xs:documentation>
           </xs:annotation>
         </xs:element>
@@ -406,7 +402,7 @@
 
   </xs:complexType>
 
-  <xs:complexType name="client">
+  <xs:complexType name="clients">
     <xs:annotation>
       <xs:documentation>
         This section contains settings that affect all clients
@@ -426,10 +422,7 @@
         independently.
 
         - For each client to have its own configuration you can
-        set 'tc.config' to the configuration file. If the
-        configuration model is production then the 'application'
-        section for all of the clients comes from the
-        application section of the server's config file.
+        set 'tc.config' to the configuration file.
       </xs:documentation>
     </xs:annotation>
     <xs:all>
@@ -468,32 +461,6 @@
   </xs:complexType>
   
   <xs:complexType name="servers">
-    <xs:annotation>
-      <xs:documentation>
-        This section defines the servers present in your
-        Terracotta system. You can omit this section entirely, in
-        which case it behaves as if there's a single server with
-        all values set at their default. You can include exactly
-        one server entry here (the common case), or, if you're
-        going to run multiple servers for failover, you can
-        include multiple servers here.
-
-        If you include more than one server here, note that each
-        server will need to know which configuration it should use
-        as it starts up. If you name your servers according to the
-        host that they run on (and no host contains more than one
-        server), then they will find the hostname themselves and
-        work automatically.
-
-        If you name your servers in any other fashion (and, again,
-        only if there is more than one 'server' element present
-        here), then you will need to pass the command-line option
-        "-n
-        <![CDATA[ <name>]]>
-        " to the start-tc-server script, passing it the name of a
-        server configuration from this file.
-      </xs:documentation>
-    </xs:annotation>
     <xs:sequence maxOccurs="1" minOccurs="0">
       <xs:element name="server" type="server" maxOccurs="unbounded" minOccurs="0" />
       <xs:element name="mirror-group" type="mirror-group" maxOccurs="unbounded" minOccurs="0" />
