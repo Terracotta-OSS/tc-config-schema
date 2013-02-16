@@ -58,7 +58,7 @@
             </xs:documentation>
           </xs:annotation>
         </xs:element>
-        <xs:element name="clients" type="clients" minOccurs="0">
+        <xs:element name="clients" type="client" minOccurs="0">
           <xs:annotation>
             <xs:documentation>
               This section contains settings that affect
@@ -402,7 +402,7 @@
 
   </xs:complexType>
 
-  <xs:complexType name="clients">
+  <xs:complexType name="client">
     <xs:annotation>
       <xs:documentation>
         This section contains settings that affect all clients
