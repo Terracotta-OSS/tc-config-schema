@@ -45,7 +45,7 @@
                   <argument>${env.DOCFLEX_HOME}/templates/XSDDoc/FramedDoc.tpl</argument>
                   <argument>-format</argument>
                   <argument>HTML</argument>
-                  <argument>-p:docTitle=\"Terracotta Configuration Schema Version ${schema.version}\"</argument>
+                  <argument>-p:docTitle=Terracotta Configuration Schema Version ${schema.version}</argument>
                   <argument>-d</argument>
                   <argument>${project.build.directory}/docflex</argument>
                   <argument>-f</argument>
