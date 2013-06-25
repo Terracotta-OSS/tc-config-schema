@@ -1,12 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
     <groupId>org.terracotta</groupId>
     <artifactId>tc-config-schema-parent</artifactId>
-    <version>4.1.1-SNAPSHOT</version>
+    <version>4.1.1</version>
     <relativePath>..</relativePath>
   </parent>
 
@@ -17,6 +16,10 @@
   <properties>
     <schema.version>8</schema.version>
     <skip.schema>true</skip.schema>
+  
+    <metadata.build.jenkins.url>http://jenkinsmaster.terracotta.lan:9000/job/tc-config-schema_trunk_releaser/6/</metadata.build.jenkins.url>
+    <metadata.build.maven.active.profiles>docflex,terracotta-repositories,release,tc-publish</metadata.build.maven.active.profiles>
+    <metadata.svn.revision>40494</metadata.svn.revision>
   </properties>
   
   <build>
