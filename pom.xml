@@ -6,12 +6,12 @@
     <groupId>org.terracotta.forge</groupId>
     <artifactId>forge-parent</artifactId>
     <version>3.5</version>
-    <relativePath/>
+    <relativePath />
   </parent>
 
   <groupId>org.terracotta</groupId>
   <artifactId>tc-config-schema-parent</artifactId>
-  <version>4.1.1</version>
+  <version>4.1.2-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>tc-config-schema-parent</name>
   

@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.terracotta</groupId>
     <artifactId>tc-config-schema-parent</artifactId>
-    <version>4.1.1</version>
+    <version>4.1.2-SNAPSHOT</version>
     <relativePath>..</relativePath>
   </parent>
 
@@ -52,7 +52,7 @@
     								</goals>
     							</pluginExecutionFilter>
     							<action>
-    								<ignore/>
+    								<ignore />
     							</action>
     						</pluginExecution>
     						<pluginExecution>
@@ -69,7 +69,7 @@
     								</goals>
     							</pluginExecutionFilter>
     							<action>
-    								<ignore/>
+    								<ignore />
     							</action>
     						</pluginExecution>
     					</pluginExecutions>
