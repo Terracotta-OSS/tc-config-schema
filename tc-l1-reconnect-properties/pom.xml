@@ -6,7 +6,7 @@
   <parent>
     <groupId>org.terracotta</groupId>
     <artifactId>tc-config-schema-parent</artifactId>
-    <version>4.1.2-SNAPSHOT</version>
+    <version>4.1.2_preview-SNAPSHOT</version>
     <relativePath>..</relativePath>
   </parent>
 
