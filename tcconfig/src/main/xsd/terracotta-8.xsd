@@ -147,6 +147,21 @@
     </xs:sequence>
   </xs:complexType>
 
+  <xs:complexType name="dataStorage-offheap">
+    <xs:attribute name="size" type="xs:string" use="optional"/>
+  </xs:complexType>
+
+  <xs:complexType name="dataStorage-flash">
+  </xs:complexType>
+
+  <xs:complexType name="dataStorage">
+    <xs:all>
+      <xs:element name="offheap" type="dataStorage-offheap" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="flash" type="dataStorage-flash" minOccurs="0" maxOccurs="1"/>
+    </xs:all>
+    <xs:attribute name="maxSize" type="xs:string" use="required"/>
+  </xs:complexType>
+
   <xs:complexType name="authentication-mode">
     <xs:annotation>
       <xs:documentation xmlns="http://www.w3.org/1999/xhtml">Describes the authentication mode,
@@ -203,7 +218,8 @@
 
     <xs:all>
       <xs:element name="offheap" type="offheap" minOccurs="0" maxOccurs="1" />
-    
+      <xs:element name="dataStorage" type="dataStorage" minOccurs="0" maxOccurs="1"/>
+
       <xs:element name="authentication" type="authentication" minOccurs="0">
         <xs:annotation>
           <xs:documentation xmlns="http://www.w3.org/1999/xhtml"> Turn on JMX authentication for the Terracotta Server, Enterprise Edition.
