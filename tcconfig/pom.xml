@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.terracotta</groupId>
     <artifactId>tc-config-schema-parent</artifactId>
-    <version>4.2.1-SNAPSHOT</version>
+    <version>4.2.1</version>
     <relativePath>..</relativePath>
   </parent>
 
@@ -16,6 +16,10 @@
   <properties>
     <schema.version>9</schema.version>
     <skip.schema>true</skip.schema>
+  
+    <metadata.build.jenkins.url>http://jenkinsmaster.terracotta.lan:9000/job/tc-config-schema_trunk_releaser/10/</metadata.build.jenkins.url>
+    <metadata.build.maven.active.profiles>docflex,terracotta-repositories,release,tc-publish</metadata.build.maven.active.profiles>
+    <metadata.svn.revision>41598</metadata.svn.revision>
   </properties>
   
   <build>
