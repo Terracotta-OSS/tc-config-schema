@@ -159,7 +159,7 @@
       <xs:element name="offheap" type="dataStorage-offheap" minOccurs="0" maxOccurs="1"/>
       <xs:element name="flash" type="dataStorage-flash" minOccurs="0" maxOccurs="1"/>
     </xs:all>
-    <xs:attribute name="maxSize" type="xs:string" use="required"/>
+    <xs:attribute name="size" type="xs:string" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="authentication-mode">
