@@ -151,13 +151,13 @@
     <xs:attribute name="size" type="xs:string" use="optional"/>
   </xs:complexType>
 
-  <xs:complexType name="dataStorage-flash">
+  <xs:complexType name="dataStorage-hybrid">
   </xs:complexType>
 
   <xs:complexType name="dataStorage">
     <xs:all>
       <xs:element name="offheap" type="dataStorage-offheap" minOccurs="0" maxOccurs="1"/>
-      <xs:element name="flash" type="dataStorage-flash" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="hybrid" type="dataStorage-hybrid" minOccurs="0" maxOccurs="1"/>
     </xs:all>
     <xs:attribute name="size" type="xs:string" use="required"/>
   </xs:complexType>
