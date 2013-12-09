@@ -11,7 +11,7 @@
 
   <groupId>org.terracotta</groupId>
   <artifactId>tc-config-schema-parent</artifactId>
-  <version>4.2.2-SNAPSHOT</version>
+  <version>4.2.2</version>
   <packaging>pom</packaging>
   <name>tc-config-schema-parent</name>
   
@@ -23,6 +23,10 @@
 
   <properties>
     <skip.testjar>true</skip.testjar>
+  
+    <metadata.build.jenkins.url>http://jenkinsmaster.terracotta.lan:9000/job/tc-config-schema_trunk_releaser/11/</metadata.build.jenkins.url>
+    <metadata.build.maven.active.profiles>terracotta-repositories,release,tc-publish</metadata.build.maven.active.profiles>
+    <metadata.svn.revision>41778</metadata.svn.revision>
   </properties>
 
   <dependencies>
