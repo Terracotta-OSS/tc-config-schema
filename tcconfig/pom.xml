@@ -15,7 +15,7 @@
   
   <properties>
     <!-- if you change this schema.version, please do:
-      1. update schema.version in the appropriate ${TC-EE-BRANCH}/bigmemory-max-kit/pom.xml
+      1. update schema.version in the appropriate ${TC-EE-BRANCH}/community/build-parent/pom.xml
       2. create a INT jira to publish newly released schema to the public
     -->
     <schema.version>9</schema.version>
