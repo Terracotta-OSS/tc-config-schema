@@ -1,18 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
     <groupId>org.terracotta.forge</groupId>
     <artifactId>forge-parent</artifactId>
-    <version>3.0</version>
+    <version>3.7</version>
     <relativePath/>
   </parent>
 
   <groupId>org.terracotta</groupId>
   <artifactId>tc-config-schema-parent</artifactId>
-  <version>4.0.2-SNAPSHOT</version>
+  <version>8.1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>tc-config-schema-parent</name>
   
@@ -58,10 +57,9 @@
             <javaSource>1.6</javaSource>           
             <classGenerationDirectory>${project.build.outputDirectory}</classGenerationDirectory>
           </configuration>
-         
           <executions>
             <execution>
-              <phase>generate-sources</phase>
+              <phase>process-classes</phase>
               <goals>
                 <goal>xmlbeans</goal>
               </goals>
@@ -104,5 +102,21 @@
       </plugin>
     </plugins>
   </build>
+
+  <distributionManagement>
+    <repository>
+      <id>terracotta-releases</id>
+      <name>Terracotta Releases Repository</name>
+      <url>${terracotta-releases-url}</url>
+    </repository>
+    <snapshotRepository>
+      <id>terracotta-snapshots</id>
+      <uniqueVersion>false</uniqueVersion>
+      <name>Terracotta Snapshots Repository</name>
+      <url>${terracotta-snapshots-url}</url>
+    </snapshotRepository>
+  </distributionManagement>
+
+  
 
 </project>
