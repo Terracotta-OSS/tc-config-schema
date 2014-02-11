@@ -12,7 +12,7 @@
   </fileSets>
   <files>
     <file>
-      <source>${basedir}/src/main/xsd/terracotta-${schema.version}.xsd</source>
+      <source>target/terracotta-${project.version}.xsd</source>
       <outputDirectory>/</outputDirectory>
     </file>
   </files>  
