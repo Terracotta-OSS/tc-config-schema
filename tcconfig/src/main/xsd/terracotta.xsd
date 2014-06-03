@@ -365,6 +365,7 @@
             Default: "tsa-port" + 10
           </xs:documentation>
         </xs:annotation>
+
       </xs:element>
       <xs:element name="management-port" type="bind-port" minOccurs="0" maxOccurs="1">
         <xs:annotation>
@@ -429,7 +430,7 @@
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
-
+    <xs:attribute name="jmx-enabled" type="xs:boolean" use="optional" default="false" />
   </xs:complexType>
 
   <xs:complexType name="client">
