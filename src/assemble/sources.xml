@@ -7,7 +7,7 @@
   <fileSets>
     <fileSet>
       <outputDirectory>/</outputDirectory>
-      <directory>${project.build.directory}/generated-sources/xmlbeans</directory>
+      <directory>${project.build.directory}/generated-sources/xjc</directory>
       <excludes>
         <exclude>.staleFlag</exclude>
       </excludes>
