@@ -33,6 +33,12 @@
                       <filter token="project.version" value="${project.version}"/>
                     </filterset>
                   </copy>
+                  <copy todir="target/xsd">
+                    <fileset dir="src/main/xsd"/>
+                    <filterset>
+                      <filter token="project.version" value="${project.version}"/>
+                    </filterset>
+                  </copy>
                 </tasks>
               </configuration>
               <goals>
@@ -150,6 +156,15 @@
     				</lifecycleMappingMetadata>
     			</configuration>
     		</plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>xmlbeans-maven-plugin</artifactId>
+          <version>2.3.3</version>
+          <configuration>
+            <verbose>false</verbose>
+            <schemaDirectory>target/xsd</schemaDirectory>
+          </configuration>
+        </plugin>
     	</plugins>
     </pluginManagement>
   </build>
