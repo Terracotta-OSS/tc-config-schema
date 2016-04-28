@@ -139,6 +139,13 @@
   <xs:complexType name="restartable">
     <xs:attribute name="enabled" use="optional" type="xs:boolean" default="false"/>
   </xs:complexType>
+
+  <xs:simpleType name="failover-priority">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="CONSISTENCY"/>
+      <xs:enumeration value="AVAILABILITY"/>
+    </xs:restriction>
+  </xs:simpleType>
   
   <xs:complexType name="offheap">
     <xs:sequence>
@@ -498,6 +505,7 @@
       <xs:element name="update-check" type="update-check" maxOccurs="1" minOccurs="0" />
       <xs:element name="garbage-collection" type="garbage-collection" minOccurs="0" maxOccurs="1" />
       <xs:element name="restartable" type="restartable" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="failover-priority" type="failover-priority" minOccurs="0" maxOccurs="1" default="AVAILABILITY"/>
       <xs:element name="client-reconnect-window" type="non-negative-int" minOccurs="0" maxOccurs="1" default="120" />
     </xs:sequence>
     <xs:attribute name="secure" type="xs:boolean" use="optional" default="false" />
