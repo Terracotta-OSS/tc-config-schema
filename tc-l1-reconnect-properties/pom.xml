@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.terracotta</groupId>
     <artifactId>tc-config-schema-parent</artifactId>
-    <version>9.5</version>
+    <version>9.6-SNAPSHOT</version>
     <relativePath>..</relativePath>
   </parent>
 
@@ -14,10 +14,6 @@
   <name>tc-l1-reconnect-properties</name>
   
   <properties>
-  
-    <metadata.build.jenkins.url>http://jenkins.terracotta.eur.ad.sag:8080/job/releasers/job/tc-config-schema_trunk_releaser/17/</metadata.build.jenkins.url>
-    <metadata.build.maven.active.profiles>terracotta-repositories,release,tc-publish,fullmode</metadata.build.maven.active.profiles>
-    <metadata.svn.revision/>
   </properties>
 
   <build>
