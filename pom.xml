@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.terracotta.forge</groupId>
     <artifactId>forge-parent</artifactId>
-    <version>4.10</version>
+    <version>4.12</version>
     <relativePath/>
   </parent>
 
@@ -24,37 +24,6 @@
   <properties>
     <skip.testjar>true</skip.testjar>
   </properties>
-
-  <profiles>
-    <profile>
-      <id>sag-deps</id>
-        <activation>
-          <property>
-            <name>sag-deps</name>
-            <value>true</value>
-          </property>
-        </activation>
-        <build>
-          <pluginManagement>
-            <plugins>
-              <plugin>
-              <groupId>org.terracotta</groupId>
-              <artifactId>maven-forge-plugin</artifactId>
-              <dependencies>
-                <dependency>
-                  <groupId>com.softwareag.ibit.tools.util</groupId>
-                  <artifactId>finder</artifactId>
-                  <!-- Before bumping version - verify it still accepts exclusion files -->
-                  <version>3.0</version>
-                  <scope>compile</scope>
-                </dependency>
-              </dependencies>
-              </plugin>
-            </plugins>
-          </pluginManagement>
-        </build>
-    </profile>
-  </profiles>
 
   <dependencies>
     <dependency>
