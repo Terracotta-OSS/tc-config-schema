@@ -27,7 +27,7 @@
 
   <groupId>org.terracotta</groupId>
   <artifactId>tc-config-schema-parent</artifactId>
-  <version>9.7-SNAPSHOT</version>
+  <version>9.7</version>
   <packaging>pom</packaging>
   <name>tc-config-schema-parent</name>
   

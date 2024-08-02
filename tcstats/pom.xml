@@ -21,7 +21,7 @@
   <parent>
     <groupId>org.terracotta</groupId>
     <artifactId>tc-config-schema-parent</artifactId>
-    <version>9.7-SNAPSHOT</version>
+    <version>9.7</version>
     <relativePath>..</relativePath>
   </parent>
 
