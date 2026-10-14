@@ -232,6 +232,13 @@
       <xs:attribute name="value" type="xs:string" use="required"/>
   </xs:complexType>
 
+  <xs:simpleType name="crypto-compliance">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="PQC-PREFERRED"/>
+      <xs:enumeration value="PQC-STRICT"/>
+    </xs:restriction>
+  </xs:simpleType>
+
   <xs:complexType name="server">
     <xs:annotation>
       <xs:documentation xmlns="http://www.w3.org/1999/xhtml">
@@ -525,6 +532,7 @@
       <xs:element name="client-reconnect-window" type="non-negative-int" minOccurs="0" maxOccurs="1" default="120" />
     </xs:sequence>
     <xs:attribute name="secure" type="xs:boolean" use="optional" default="false" />
+    <xs:attribute name="crypto-compliance" type="crypto-compliance" use="optional"/>
   </xs:complexType>
 
   <xs:complexType name="bind-port">
