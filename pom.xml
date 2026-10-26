@@ -21,7 +21,7 @@
   <parent>
     <groupId>org.terracotta.forge</groupId>
     <artifactId>forge-parent</artifactId>
-    <version>8.0</version>
+    <version>9.3</version>
     <relativePath/>
   </parent>
 
@@ -38,6 +38,7 @@
   </modules>
 
   <properties>
+    <artifactory-build-name>tc-config-schema</artifactory-build-name>
     <skip.testjar>true</skip.testjar>
   </properties>
 
@@ -132,20 +133,15 @@ limitations under the License.
     </plugins>
   </build>
 
-  <distributionManagement>
+  <repositories>
+    <!-- this we need to find parent -->
     <repository>
       <id>terracotta-releases</id>
-      <name>Terracotta Releases Repository</name>
-      <url>${terracotta-releases-url}</url>
+      <url>https://repo.terracotta.org/maven2</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
     </repository>
-    <snapshotRepository>
-      <id>terracotta-snapshots</id>
-      <uniqueVersion>false</uniqueVersion>
-      <name>Terracotta Snapshots Repository</name>
-      <url>${terracotta-snapshots-url}</url>
-    </snapshotRepository>
-  </distributionManagement>
-
-  
+  </repositories>
 
 </project>
